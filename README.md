@@ -21,10 +21,7 @@ To manually install **Magic Warnings** on your system:
    ```bash
    xattr -d com.apple.quarantine Magic\ Warnings.app
    ```
-4. (Optional) Set a custom icon by using the `Graphics/low_battery_graphics.icns` file:
-   - Right-click on the `Magic Warnings.app` > **Get Info**.
-   - Drag the `low_battery_graphics.icns` file into the app’s icon in the top-left corner of the Info window.
-5. Launch the app.
+4. Launch the app.
 
 
 ## Installation from Releases
