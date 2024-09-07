@@ -1,2 +1,26 @@
-# Magic-Warnings
-App warning when the battery level of Magic devices drops below 20%
+# Magic Warning
+
+## Description
+
+The app will show a warning if the battery level of Apple Magic mouse, trackpad, and keyboard drops below 20%.
+
+## Manual installation
+
+- step1 
+- step2
+- Use the icon `Graphics/low_battery_graphics.icns`
+
+## Installation from releases
+
+-
+
+## Periodic monitoring
+
+- Download `org.alberti42.magic-warning-launcher.plist` in `<HOME>/Library/LaunchAgents`.
+- Modify `ProgramArguments` to reflect the actual location where you install the `Magic Warning` app.
+	```
+	<key>ProgramArguments</key>
+		<array>
+			<string>/Applications/Magic Warnings.app/Contents/MacOS/applet</string>
+		</array>
+	```
