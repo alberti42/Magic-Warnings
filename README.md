@@ -22,7 +22,8 @@ To manually install **Magic Warnings** on your system:
    xattr -d com.apple.quarantine Magic\ Warnings.app
    ```
 4. Launch the app.
-
+5. In System Settings under Notifications, enable notifications for the `Magic Warnings` app:
+   <img src="./Graphics/messages_authorization.jpg" alt="Screenshot settings"/>
 
 ## Installation from Releases
 
