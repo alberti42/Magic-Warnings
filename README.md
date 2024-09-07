@@ -1,4 +1,4 @@
-# <img src="./Graphics/low_battery_graphics_logo.svg" height="32" alt="Magic Warnings logo" align="left"/> Magic Warnings
+# <img src="./Graphics/low_battery_graphics.svg" height="32" alt="Magic Warnings logo" align="left"/> Magic Warnings
 
 ## Description
 
