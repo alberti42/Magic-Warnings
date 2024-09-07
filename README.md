@@ -1,5 +1,10 @@
 # Magic Warning
 
+Use this graphics as a logo for the page 
+
+![Logo](./Graphics/low_battery_graphics.svg)
+<img src="./Graphics/low_battery_graphics.svg">
+
 ## Description
 
 The app will show a warning if the battery level of Apple Magic mouse, trackpad, and keyboard drops below 20%.
