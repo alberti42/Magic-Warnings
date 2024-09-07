@@ -15,7 +15,7 @@
 
 To manually install **Magic Warnings** on your system:
 
-1. Download the app from the [Releases](#installation-from-releases) section.
+1. Download the app from the [releases](#installation-from-releases) section.
 2. Copy the `Magic Warnings.app` file to your `/Applications` folder (or your preferred location).
 3. Remove the quarantine flag that macOS adds to files downloaded from the internet. This is necessary to allow the app to run:
    ```bash
