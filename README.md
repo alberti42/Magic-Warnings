@@ -17,10 +17,15 @@ To manually install **Magic Warnings** on your system:
 
 1. Download the app from the [Releases](#installation-from-releases) section.
 2. Copy the `Magic Warnings.app` file to your `/Applications` folder (or your preferred location).
-3. (Optional) Set a custom icon by using the `Graphics/low_battery_graphics.icns` file:
+3. Remove the quarantine flag that macOS adds to files downloaded from the internet. This is necessary to allow the app to run:
+   ```bash
+   xattr -d com.apple.quarantine Magic\ Warnings.app
+   ```
+4. (Optional) Set a custom icon by using the `Graphics/low_battery_graphics.icns` file:
    - Right-click on the `Magic Warnings.app` > **Get Info**.
    - Drag the `low_battery_graphics.icns` file into the app’s icon in the top-left corner of the Info window.
-4. Launch the app.
+5. Launch the app.
+
 
 ## Installation from Releases
 
@@ -32,16 +37,16 @@ To ensure **Magic Warnings** runs periodically, you can set up a **Launch Agent*
 
 1. Download `org.alberti42.magic-warning-launcher.plist` and place it in your `~/Library/LaunchAgents/` directory.
 2. Modify the `ProgramArguments` in the `.plist` file to reflect the actual location of the `Magic Warnings.app`:
-   \`\`\`xml
+   ```xml
    <key>ProgramArguments</key>
    <array>
        <string>/Applications/Magic Warnings.app/Contents/MacOS/applet</string>
    </array>
-   \`\`\`
+   ```
 3. Load the Launch Agent using the following Terminal command:
-   \`\`\`bash
+   ```bash
    launchctl load ~/Library/LaunchAgents/org.alberti42.magic-warning-launcher.plist
-   \`\`\`
+   ```
    This will ensure the app runs periodically to monitor the battery status of your devices.
 
 ## Donations
