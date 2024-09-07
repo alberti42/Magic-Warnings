@@ -3,16 +3,19 @@
 ## Description
 
 <div>
-<img src="./Graphics/low_battery_graphics.svg" height="100" alt="Magic Warnings logo" align="left"/>
+    <img src="./Graphics/low_battery_graphics.svg" height="100" alt="Magic Warnings logo" align="left" style="margin-right: 15px;"/>
 
-**Magic Warnings** is a lightweight macOS app that monitors the battery levels of your Apple Magic Mouse, Trackpad, and Keyboard.
+    <p><strong>Magic Warnings</strong> is a lightweight macOS app that monitors the battery levels of your Apple Magic Mouse, Trackpad, and Keyboard.</p>
 </div>
 
-<div> Key features include:
-- Displays a warning notification if the battery of any device drops below 20%.
-- Notifications are displayed every 3 hours if the battery remains below 20%.
-- Battery levels are checked automatically every 10 minutes.
-- Supports monitoring multiple Apple devices simultaneously, ensuring that you are notified for all connected devices.
+<div>
+    <p><strong>Key features include:</strong></p>
+    <ul>
+        <li>Displays a warning notification if the battery of any device drops below 20%.</li>
+        <li>Notifications are displayed every 3 hours if the battery remains below 20%.</li>
+        <li>Battery levels are checked automatically every 10 minutes.</li>
+        <li>Supports monitoring multiple Apple devices simultaneously, ensuring that you are notified for all connected devices.</li>
+    </ul>
 </div>
 
 ## Manual Installation
