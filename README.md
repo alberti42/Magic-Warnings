@@ -1,4 +1,4 @@
-# Magic Warning
+# Magic Warnings
 
 Use this graphics as a logo for the page 
 
