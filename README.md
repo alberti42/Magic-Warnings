@@ -23,7 +23,7 @@ To manually install **Magic Warnings** on your system:
    ```
 4. Launch the app.
 5. In System Settings under Notifications, enable notifications for the `Magic Warnings` app:
-   <img src="./Graphics/messages_authorization.jpg" alt="Screenshot settings"/>
+   <img src="./Graphics/messages_authorization.jpg" alt="Screenshot settings" style="width:400px;"/>
 
 ## Installation from Releases
 
