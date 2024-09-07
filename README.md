@@ -46,6 +46,27 @@ To ensure **Magic Warnings** runs periodically, you can set up a **Launch Agent*
    ```
    This will ensure the app runs periodically to monitor the battery status of your devices.
 
+## Advanced Customization
+
+If you'd like to customize the behavior of **Magic Warnings**, you can modify the following properties in the script:
+
+1. Navigate to the folder where the app is installed (e.g., `/Applications`).
+2. Open the following file in a script editor (e.g., AppleScript Editor):
+   ```
+   Magic Warnings.app/Contents/Resources/Scripts/main.scpt
+   ```
+3. Modify the following properties to suit your preferences:
+   ```applescript
+   -- Disable warnings before so many hours have passed since the last warning message
+   property disableWarningBeforeSoManyHoursHavePassed : 3
+
+   -- Define the threshold for battery warnings
+   property threshold : 20
+   ```
+- **disableWarningBeforeSoManyHoursHavePassed**: Set the number of hours to wait before sending a repeated low battery warning.
+- **threshold**: Set the battery percentage threshold below which the warning will be triggered (default is 20%).
+4. Save the changes, and relaunch the app for the new settings to take effect.
+
 ## Donations
 
 If you find **Magic Warnings** useful and would like to support its development, consider buying me a coffee!
