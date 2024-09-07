@@ -50,7 +50,7 @@ XWJtdHV3fIeQn6OrAAAAAAAAAQEAAAAAAAAAGAAAAAAAAAAAAAAAAAAAALQ=</string>
 		<real>0.80000001192092896</real>
 		<key>viewControllers</key>
 		<dict>
-			<key>8149F485-9A5F-420E-8B21-729944ED4928-1417-000006F3259B0559</key>
+			<key>AD383CF7-C2E4-40B2-8A16-08C75EB409DE-47965-00000C93B1635F56</key>
 			<dict>
 				<key>debuggerViewState</key>
 				<dict>
@@ -77,9 +77,9 @@ XWJtdHV3fIeQn6OrAAAAAAAAAQEAAAAAAAAAGAAAAAAAAAAAAAAAAAAAALQ=</string>
 						<dict>
 							<key>3</key>
 							<array>
-								<integer>429</integer>
-								<integer>542</integer>
-								<integer>213</integer>
+								<integer>453</integer>
+								<integer>573</integer>
+								<integer>225</integer>
 							</array>
 							<key>5</key>
 							<array>
@@ -143,7 +143,7 @@ XWJtdHV3fIeQn6OrAAAAAAAAAQEAAAAAAAAAGAAAAAAAAAAAAAAAAAAAALQ=</string>
 								<key>LNSTextViewWrapLines</key>
 								<true/>
 								<key>LNSVisibleRect</key>
-								<string>{{0, 0}, {424, 433.5}}</string>
+								<string>{{0, 0}, {424, 423.5}}</string>
 							</dict>
 						</dict>
 					</dict>
@@ -168,7 +168,7 @@ XWJtdHV3fIeQn6OrAAAAAAAAAQEAAAAAAAAAGAAAAAAAAAAAAAAAAAAAALQ=</string>
 					</dict>
 				</dict>
 				<key>eventLogHeight</key>
-				<real>202.5</real>
+				<real>209</real>
 				<key>eventLogViewState</key>
 				<dict>
 					<key>format</key>
@@ -275,7 +275,7 @@ XWJtdHV3fIeQn6OrAAAAAAAAAQEAAAAAAAAAGAAAAAAAAAAAAAAAAAAAALQ=</string>
 								<key>length</key>
 								<integer>0</integer>
 								<key>location</key>
-								<integer>1088</integer>
+								<integer>4766</integer>
 							</dict>
 						</array>
 						<key>LNSTextViewShowInvisibles</key>
@@ -287,7 +287,7 @@ XWJtdHV3fIeQn6OrAAAAAAAAAQEAAAAAAAAAGAAAAAAAAAAAAAAAAAAAALQ=</string>
 						<key>LNSTextViewWrapLines</key>
 						<false/>
 						<key>LNSVisibleRect</key>
-						<string>{{0, 226.5}, {2074, 971.5}}</string>
+						<string>{{0, 1230}, {2074, 1033}}</string>
 						<key>ShowLineNumbers</key>
 						<false/>
 						<key>showCodeCoverage</key>
@@ -314,9 +314,9 @@ XWJtdHV3fIeQn6OrAAAAAAAAAQEAAAAAAAAAGAAAAAAAAAAAAAAAAAAAALQ=</string>
 				<key>tabsHidden</key>
 				<false/>
 				<key>windowControllerID</key>
-				<string>8149F485-9A5F-420E-8B21-729944ED4928-1417-000006F3259B0559</string>
+				<string>AD383CF7-C2E4-40B2-8A16-08C75EB409DE-47965-00000C93B1635F56</string>
 				<key>windowFrame</key>
-				<string>0 118 2560 1297 0 0 2560 1415 </string>
+				<string>0 50 2560 1365 0 0 2560 1415 </string>
 			</dict>
 		</dict>
 		<key>windowControllers</key>
@@ -325,7 +325,7 @@ XWJtdHV3fIeQn6OrAAAAAAAAAQEAAAAAAAAAGAAAAAAAAAAAAAAAAAAAALQ=</string>
 				<key>controllerClass</key>
 				<string>SD8ScriptWindowController</string>
 				<key>controllerID</key>
-				<string>8149F485-9A5F-420E-8B21-729944ED4928-1417-000006F3259B0559</string>
+				<string>AD383CF7-C2E4-40B2-8A16-08C75EB409DE-47965-00000C93B1635F56</string>
 				<key>controllerState</key>
 				<dict>
 					<key>miniaturized</key>
@@ -333,7 +333,7 @@ XWJtdHV3fIeQn6OrAAAAAAAAAQEAAAAAAAAAGAAAAAAAAAAAAAAAAAAAALQ=</string>
 					<key>timerShowsDetail</key>
 					<false/>
 					<key>windowFrame</key>
-					<string>0 118 2560 1297 0 0 2560 1415 </string>
+					<string>0 50 2560 1365 0 0 2560 1415 </string>
 				</dict>
 			</dict>
 		</array>

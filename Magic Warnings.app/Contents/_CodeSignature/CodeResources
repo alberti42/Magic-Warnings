@@ -6,15 +6,15 @@
 	<dict>
 		<key>Resources/Script Debugger.plist</key>
 		<data>
-		oLfNUYjje6wsqWuQZo89jqZGW5A=
+		myx+pT8ZuawUgp4mx/ivAVHT3y0=
 		</data>
 		<key>Resources/Scripts/main.recover.rtf</key>
 		<data>
-		rxMkbUHqt1Ij7LkagxmoIa+lnt8=
+		L20TnoGmPx+EbZPrXyeNmpT9AvA=
 		</data>
 		<key>Resources/Scripts/main.scpt</key>
 		<data>
-		xdfwa9YrZXUE//De+YJJ58ymad0=
+		XBjUkNiJOnsFZOM42YHTkKM5zZg=
 		</data>
 		<key>Resources/applet.icns</key>
 		<data>
@@ -22,7 +22,7 @@
 		</data>
 		<key>Resources/applet.rsrc</key>
 		<data>
-		PYQdMg9IqZy/PvnMT7W+/ChiGfo=
+		6OyFmG+X6HxpD8vHULy7XqZYkYo=
 		</data>
 		<key>Resources/description.rtfd/TXT.rtf</key>
 		<data>
@@ -30,7 +30,7 @@
 		</data>
 		<key>Resources/magic-warning-icon.icns</key>
 		<data>
-		JOwjel8gihZir+DTQwEjnoxZtVs=
+		OyhcN93me49bRm+EMFhwiBYDWcM=
 		</data>
 	</dict>
 	<key>files2</key>
@@ -39,33 +39,33 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			oLfNUYjje6wsqWuQZo89jqZGW5A=
+			myx+pT8ZuawUgp4mx/ivAVHT3y0=
 			</data>
 			<key>hash2</key>
 			<data>
-			jXkN2YU83V2W3RoRCPL4BX4uXV3SV2AuKf1OcnWZjQk=
+			badl4jzexEsbucysVs9haSfah4WAuS1JHFt88pczUuc=
 			</data>
 		</dict>
 		<key>Resources/Scripts/main.recover.rtf</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			rxMkbUHqt1Ij7LkagxmoIa+lnt8=
+			L20TnoGmPx+EbZPrXyeNmpT9AvA=
 			</data>
 			<key>hash2</key>
 			<data>
-			39/6pOA5HX0SmY3D1CdY9IB0J8Ky0DMCk8NO4QY9nHM=
+			cuB1C19T7dbUePcWD59XHjLDpFqcu9YMElitaT8ucAQ=
 			</data>
 		</dict>
 		<key>Resources/Scripts/main.scpt</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			xdfwa9YrZXUE//De+YJJ58ymad0=
+			XBjUkNiJOnsFZOM42YHTkKM5zZg=
 			</data>
 			<key>hash2</key>
 			<data>
-			7mofqHkFkN3lnMoFyzuaJYMl/mPV+NPC9oHwPyrqlSA=
+			Eeeoa7yDKpxZOTHwKBKMaCLKbX2TAnSpmmQe0BN0Dss=
 			</data>
 		</dict>
 		<key>Resources/applet.icns</key>
@@ -83,11 +83,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			PYQdMg9IqZy/PvnMT7W+/ChiGfo=
+			6OyFmG+X6HxpD8vHULy7XqZYkYo=
 			</data>
 			<key>hash2</key>
 			<data>
-			lcjiqQ6khLf7YFaU+RDOHS+z+58I+kHYfEjVXWPfTDU=
+			i6NZmZgycB6Zr5LhYLvE9ms2zRd1lhL4+pLNyxrl2V0=
 			</data>
 		</dict>
 		<key>Resources/description.rtfd/TXT.rtf</key>
@@ -105,11 +105,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			JOwjel8gihZir+DTQwEjnoxZtVs=
+			OyhcN93me49bRm+EMFhwiBYDWcM=
 			</data>
 			<key>hash2</key>
 			<data>
-			8eBwj0sTmRiL6dHE5/tGd0VRNtWLaV0Tp9gziNaiJ+o=
+			qReh/DBZNHImKKxEBJGDDHHIOTZx18vPXYQcU++QAmA=
 			</data>
 		</dict>
 	</dict>

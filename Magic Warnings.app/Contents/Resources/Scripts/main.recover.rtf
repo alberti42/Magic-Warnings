@@ -203,37 +203,21 @@
 \f0\b then
 \f1\b0 \
 				
-\f0\b if
-\f1\b0  
-\f0\b my
-\f1\b0  \cf9 shouldNotify\cf2 (\cf6 serial_number\cf2 ) 
-\f0\b then
-\f1\b0 \
-					
 \f0\b set
 \f1\b0  \cf6 notificationMessage\cf2  
 \f0\b to
 \f1\b0  "Battery status: " & \cf6 battery_percent\cf2  & "%"\
-					
+				
 \f0\b set
 \f1\b0  \cf6 notificationTitle\cf2  
 \f0\b to
 \f1\b0  \cf6 product_name\cf2  & " battery low"\
-					
+				
 \f0\b my
 \f1\b0  \cf9 showNotification\cf2 (\cf6 notificationMessage\cf2 , \cf6 notificationTitle\cf2 )\
-					
+				
 \f0\b my
 \f1\b0  \cf9 updateLastNotificationTime\cf2 (\cf6 serial_number\cf2 )\
-				
-\f0\b end
-\f1\b0  
-\f0\b if
-\f1\b0 \
-			
-\f0\b else
-\f1\b0 \
-				(\cf6 lastNotificationTimes's\cf2  \cf9 removeObjectForKey\cf2 :\cf6 serial_number\cf2 )\
 			
 \f0\b end
 \f1\b0  
@@ -348,62 +332,6 @@
 \f0\b end
 \f1\b0  \cf9 removeQuotes\cf2 \
 \
-\cf5 -- Helper method to check if we should notify (i.e., if 3 hours have passed)\cf2 \
-
-\f0\b on
-\f1\b0  \cf9 shouldNotify\cf2 (\cf6 serial_number\cf2 )\
-	
-\f0\b set
-\f1\b0  \cf6 currentDate\cf2  
-\f0\b to
-\f1\b0  
-\f0\b \cf7 current date
-\f1\b0 \cf2 \
-	
-\f0\b set
-\f1\b0  \cf6 lastNotificationTime\cf2  
-\f0\b to
-\f1\b0  \cf6 lastNotificationTimes's\cf2  \cf9 objectForKey\cf2 :\cf6 serial_number\cf2 \
-	
-\f0\b if
-\f1\b0  \cf6 lastNotificationTime\cf2  
-\f0\b is
-\f1\b0  
-\f0\b not
-\f1\b0  
-\f2\i \cf4 missing value
-\f1\i0 \cf2  
-\f0\b then
-\f1\b0 \
-		
-\f0\b if
-\f1\b0  (\cf6 currentDate\cf2  - \cf6 lastNotificationTime\cf2 ) < (\cf6 disableWarningBeforeSoManyHoursHavePassed\cf2  * \cf3 hours\cf2 ) 
-\f0\b then
-\f1\b0 \
-			
-\f0\b return
-\f1\b0  
-\f2\i \cf3 false
-\f1\i0 \cf2  \cf5 -- Less than 3 hours have passed\cf2 \
-		
-\f0\b end
-\f1\b0  
-\f0\b if
-\f1\b0 \
-	
-\f0\b end
-\f1\b0  
-\f0\b if
-\f1\b0 \
-	
-\f0\b return
-\f1\b0  
-\f2\i \cf3 true
-\f1\i0 \cf2  \cf5 -- Either no notification has been sent or more than so many hours have passed\cf2 \
-
-\f0\b end
-\f1\b0  \cf9 shouldNotify\cf2 \
-\
 \cf5 -- Helper method to update the last notification time\cf2 \
 
 \f0\b on
@@ -473,7 +401,7 @@
 \f1\i0 \cf2  \cf6 NSData's\cf2  \cf9 dataWithContentsOfFile\cf2 :\cf6 storageFilePath\cf2 \
 		
 \f0\b set
-\f1\b0  \{\cf6 notificationTimes\cf2 , \cf6 theError\cf2 \} 
+\f1\b0  \{\cf6 loadedNotificationTimes\cf2 , \cf6 theError\cf2 \} 
 \f0\b to
 \f1\b0  
 \f2\i \cf3 current application's
@@ -484,7 +412,7 @@
 \f1\i0 \cf2 )\
 		
 \f0\b if
-\f1\b0  \cf6 notificationTimes\cf2  
+\f1\b0  \cf6 loadedNotificationTimes\cf2  
 \f0\b is
 \f1\b0  
 \f0\b not
@@ -497,7 +425,65 @@
 \f0\b set
 \f1\b0  \cf6 lastNotificationTimes\cf2  
 \f0\b to
-\f1\b0  \cf6 notificationTimes's\cf2  \cf9 mutableCopy\cf2 ()\
+\f1\b0  \cf6 loadedNotificationTimes's\cf2  \cf9 mutableCopy\cf2 ()\
+			\
+			\cf5 -- Clean the last records in case they have already expired\cf2 \
+			
+\f0\b set
+\f1\b0  \cf6 currentDate\cf2  
+\f0\b to
+\f1\b0  
+\f0\b \cf7 current date
+\f1\b0 \cf2 \
+			
+\f0\b repeat
+\f1\b0  
+\f0\b with
+\f1\b0  \cf6 serial_number\cf2  
+\f0\b in
+\f1\b0  ((\cf6 lastNotificationTimes's\cf2  \cf9 allKeys\cf2 ()) 
+\f0\b as
+\f1\b0  
+\f2\i \cf4 list
+\f1\i0 \cf2 )\
+				
+\f0\b set
+\f1\b0  \cf6 notificationTime\cf2  
+\f0\b to
+\f1\b0  (\cf6 lastNotificationTimes's\cf2  \cf9 objectForKey\cf2 :\cf6 serial_number\cf2 )\
+				
+\f0\b if
+\f1\b0  \cf6 notificationTime\cf2  
+\f0\b is
+\f1\b0  
+\f0\b not
+\f1\b0  
+\f2\i \cf4 missing value
+\f1\i0 \cf2  
+\f0\b then
+\f1\b0 \
+					
+\f0\b if
+\f1\b0  (\cf6 currentDate\cf2  - \cf6 notificationTime\cf2 ) > (\cf6 disableWarningBeforeSoManyHoursHavePassed\cf2  * \cf3 hours\cf2 ) 
+\f0\b then
+\f1\b0 \
+						\cf5 -- More than X hours have passed, the last notification time has expired, and we can drop it\cf2 \
+						(\cf6 lastNotificationTimes's\cf2  \cf9 removeObjectForKey\cf2 :\cf6 serial_number\cf2 )\
+					
+\f0\b end
+\f1\b0  
+\f0\b if
+\f1\b0 \
+				
+\f0\b end
+\f1\b0  
+\f0\b if
+\f1\b0 \
+			
+\f0\b end
+\f1\b0  
+\f0\b repeat
+\f1\b0 \
 		
 \f0\b else
 \f1\b0 \
