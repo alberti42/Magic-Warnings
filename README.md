@@ -72,7 +72,7 @@ If you'd like to customize the behavior of **Magic Warnings**, you can modify th
 
 If you find **Magic Warnings** useful and would like to support its development, consider buying me a coffee!
 
-[<img src="docs/images/buy_me_coffee.png" width=300 alt="Buy Me a Coffee QR Code"/>](https://buymeacoffee.com/alberti)
+[<img src="docs/images/buy_me_coffee.png" alt="Buy Me a Coffee QR Code"/>](https://buymeacoffee.com/alberti)
 
 ## Author
 
