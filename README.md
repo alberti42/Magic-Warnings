@@ -26,7 +26,7 @@ To manually install **Magic Warnings** on your system:
 
 ## Installation from Releases
 
-You can download the latest version of the app from the [Releases](https://github.com/alberti42/MagicWarnings/releases) section of this repository. Simply download the `.zip` file, extract it, and follow the steps in the **Manual Installation** section above.
+You can download the latest version of the app from the [Releases](https://github.com/alberti42/Magic-Warnings/releases) section of this repository. Simply download the `.zip` file, extract it, and follow the steps in the **Manual Installation** section above.
 
 ## Periodic Monitoring
 
