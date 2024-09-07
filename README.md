@@ -32,7 +32,7 @@ You can download the latest version of the app from the [Releases](https://githu
 
 To ensure **Magic Warnings** runs periodically, you can set up a **Launch Agent** to trigger the app in the background.
 
-1. Download `org.alberti42.magic-warning-launcher.plist` and place it in your `~/Library/LaunchAgents/` directory.
+1. Download [`org.alberti42.magic-warning-launcher.plist`](https://raw.githubusercontent.com/alberti42/Magic-Warnings/main/org.alberti42.magic-warnings-launcher.plist) and place it in your `~/Library/LaunchAgents/` directory.
 2. Modify the `ProgramArguments` in the `.plist` file to reflect the actual location of the `Magic Warnings.app`:
    ```xml
    <key>ProgramArguments</key>
