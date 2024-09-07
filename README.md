@@ -1,6 +1,6 @@
-# <img src="./Graphics/low_battery_graphics.svg" height="32" alt="Magic Warnings logo" align="left" style="margin-top: 4px;"/> Magic Warnings
-
 ## Description
+
+[Logo](./Graphics/low_battery_graphics.svg")
 
 **Magic Warnings** is a lightweight macOS app that monitors the battery levels of your Apple Magic Mouse, Trackpad, and Keyboard.
 
