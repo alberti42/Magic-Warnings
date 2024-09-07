@@ -1,3 +1,5 @@
+# Magic Warnings app for macOS
+
 ## Description
 
 **Magic Warnings** is a lightweight macOS app that monitors the battery levels of your Apple Magic Mouse, Trackpad, and Keyboard.
@@ -23,7 +25,7 @@ To manually install **Magic Warnings** on your system:
    ```
 4. Launch the app.
 5. In System Settings under Notifications, enable notifications for the `Magic Warnings` app:
-   <img src="./Graphics/messages_authorization.jpg" alt="Screenshot settings"/>
+   <img src="./Graphics/messages_authorization.jpg" alt="Screenshot settings" style="width:400px;"/>
 
 ## Installation from Releases
 
@@ -72,7 +74,7 @@ If you'd like to customize the behavior of **Magic Warnings**, you can modify th
 
 If you find **Magic Warnings** useful and would like to support its development, consider buying me a coffee!
 
-[<img src="docs/images/buy_me_coffee.png" width=300 alt="Buy Me a Coffee QR Code"/>](https://buymeacoffee.com/alberti)
+[<img src="docs/images/buy_me_coffee.png" alt="Buy Me a Coffee QR Code"/>](https://buymeacoffee.com/alberti)
 
 ## Author
 
