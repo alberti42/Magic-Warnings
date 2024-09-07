@@ -1,9 +1,8 @@
-# Magic Warning
+# Magic Warnings
 
 Use this graphics as a logo for the page 
 
-![Logo](./Graphics/low_battery_graphics.svg)
-<img height=48 src="./Graphics/low_battery_graphics.svg">
+<img src="./Graphics/low_battery_graphics.svg" height="48">
 
 ## Description
 
