@@ -1,4 +1,4 @@
-# Magic Warnings
+# Magic Warnings app for macOS
 
 ## Description
 
