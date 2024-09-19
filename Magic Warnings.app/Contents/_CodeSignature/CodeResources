@@ -6,15 +6,15 @@
 	<dict>
 		<key>Resources/Script Debugger.plist</key>
 		<data>
-		myx+pT8ZuawUgp4mx/ivAVHT3y0=
+		UfCmEHYQJk7bILLrvDlqfCbfScc=
 		</data>
 		<key>Resources/Scripts/main.recover.rtf</key>
 		<data>
-		L20TnoGmPx+EbZPrXyeNmpT9AvA=
+		1qNaUPnhmdpZ6n7xdKicF+dQHAk=
 		</data>
 		<key>Resources/Scripts/main.scpt</key>
 		<data>
-		XBjUkNiJOnsFZOM42YHTkKM5zZg=
+		H18JuVxoDjoteYOs75OAWsA2oD0=
 		</data>
 		<key>Resources/applet.icns</key>
 		<data>
@@ -22,7 +22,7 @@
 		</data>
 		<key>Resources/applet.rsrc</key>
 		<data>
-		6OyFmG+X6HxpD8vHULy7XqZYkYo=
+		vMFFtv5Do1uW+5h5pVfxjEglw3o=
 		</data>
 		<key>Resources/description.rtfd/TXT.rtf</key>
 		<data>
@@ -39,33 +39,33 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			myx+pT8ZuawUgp4mx/ivAVHT3y0=
+			UfCmEHYQJk7bILLrvDlqfCbfScc=
 			</data>
 			<key>hash2</key>
 			<data>
-			badl4jzexEsbucysVs9haSfah4WAuS1JHFt88pczUuc=
+			zZbexz1m79gZUDZgSJvwTtLS6l3Jrn1SehSoqW6Wuus=
 			</data>
 		</dict>
 		<key>Resources/Scripts/main.recover.rtf</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			L20TnoGmPx+EbZPrXyeNmpT9AvA=
+			1qNaUPnhmdpZ6n7xdKicF+dQHAk=
 			</data>
 			<key>hash2</key>
 			<data>
-			cuB1C19T7dbUePcWD59XHjLDpFqcu9YMElitaT8ucAQ=
+			G7Ljno1vD215bbOyU9nvGhegCv+rICRpCtNZAs/FDUw=
 			</data>
 		</dict>
 		<key>Resources/Scripts/main.scpt</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			XBjUkNiJOnsFZOM42YHTkKM5zZg=
+			H18JuVxoDjoteYOs75OAWsA2oD0=
 			</data>
 			<key>hash2</key>
 			<data>
-			Eeeoa7yDKpxZOTHwKBKMaCLKbX2TAnSpmmQe0BN0Dss=
+			rx7ZiAo4X3WSaQGKtxbK7EU+Vd+4ZsL/IoOokPpXe6E=
 			</data>
 		</dict>
 		<key>Resources/applet.icns</key>
@@ -83,11 +83,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			6OyFmG+X6HxpD8vHULy7XqZYkYo=
+			vMFFtv5Do1uW+5h5pVfxjEglw3o=
 			</data>
 			<key>hash2</key>
 			<data>
-			i6NZmZgycB6Zr5LhYLvE9ms2zRd1lhL4+pLNyxrl2V0=
+			ap1vOGwLP3GkejufJCfsdKFaVvFJILYSSy322Z2/2vE=
 			</data>
 		</dict>
 		<key>Resources/description.rtfd/TXT.rtf</key>
