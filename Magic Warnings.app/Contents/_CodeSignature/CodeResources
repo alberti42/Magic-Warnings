@@ -6,11 +6,11 @@
 	<dict>
 		<key>Resources/Script Debugger.plist</key>
 		<data>
-		UfCmEHYQJk7bILLrvDlqfCbfScc=
+		TTg6Tv7i+DI1bpfHK+vHoAyj09I=
 		</data>
 		<key>Resources/Scripts/main.recover.rtf</key>
 		<data>
-		1qNaUPnhmdpZ6n7xdKicF+dQHAk=
+		VW0Bv0EnKZ1aw3iOCc+9RTA9Na4=
 		</data>
 		<key>Resources/Scripts/main.scpt</key>
 		<data>
@@ -22,7 +22,7 @@
 		</data>
 		<key>Resources/applet.rsrc</key>
 		<data>
-		vMFFtv5Do1uW+5h5pVfxjEglw3o=
+		eB1BQQ84hdGANGKMz5Xwlv7/Dgo=
 		</data>
 		<key>Resources/description.rtfd/TXT.rtf</key>
 		<data>
@@ -39,22 +39,22 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			UfCmEHYQJk7bILLrvDlqfCbfScc=
+			TTg6Tv7i+DI1bpfHK+vHoAyj09I=
 			</data>
 			<key>hash2</key>
 			<data>
-			zZbexz1m79gZUDZgSJvwTtLS6l3Jrn1SehSoqW6Wuus=
+			eNIi5fysJjGY2tlrdMC8CkGeI2xFsuhLDBrUQb5Yv6E=
 			</data>
 		</dict>
 		<key>Resources/Scripts/main.recover.rtf</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			1qNaUPnhmdpZ6n7xdKicF+dQHAk=
+			VW0Bv0EnKZ1aw3iOCc+9RTA9Na4=
 			</data>
 			<key>hash2</key>
 			<data>
-			G7Ljno1vD215bbOyU9nvGhegCv+rICRpCtNZAs/FDUw=
+			m7Ln+NKvfNq1lupRDGc/tFAcDAIrk8MbCgj+MMIZ/ZY=
 			</data>
 		</dict>
 		<key>Resources/Scripts/main.scpt</key>
@@ -83,11 +83,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			vMFFtv5Do1uW+5h5pVfxjEglw3o=
+			eB1BQQ84hdGANGKMz5Xwlv7/Dgo=
 			</data>
 			<key>hash2</key>
 			<data>
-			ap1vOGwLP3GkejufJCfsdKFaVvFJILYSSy322Z2/2vE=
+			jP/ltu6dQb2ccFwnC8pnQj1lLfwLsz0aQODF5UTCddk=
 			</data>
 		</dict>
 		<key>Resources/description.rtfd/TXT.rtf</key>

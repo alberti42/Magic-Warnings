@@ -50,7 +50,7 @@ XWJtdHV3fIeQn6OrAAAAAAAAAQEAAAAAAAAAGAAAAAAAAAAAAAAAAAAAALQ=</string>
 		<real>0.80000001192092896</real>
 		<key>viewControllers</key>
 		<dict>
-			<key>3CCE11E6-9D44-4490-BF5F-FDD93607E3E1-64570-000001FA5F3315ED</key>
+			<key>029F64B4-1B74-449C-B8BE-DB201F738411-64570-000002625D42F673</key>
 			<dict>
 				<key>debuggerViewState</key>
 				<dict>
@@ -275,7 +275,7 @@ XWJtdHV3fIeQn6OrAAAAAAAAAQEAAAAAAAAAGAAAAAAAAAAAAAAAAAAAALQ=</string>
 								<key>length</key>
 								<integer>0</integer>
 								<key>location</key>
-								<integer>2082</integer>
+								<integer>372</integer>
 							</dict>
 						</array>
 						<key>LNSTextViewShowInvisibles</key>
@@ -287,7 +287,7 @@ XWJtdHV3fIeQn6OrAAAAAAAAAQEAAAAAAAAAGAAAAAAAAAAAAAAAAAAAALQ=</string>
 						<key>LNSTextViewWrapLines</key>
 						<false/>
 						<key>LNSVisibleRect</key>
-						<string>{{0, 920}, {1544, 530.5}}</string>
+						<string>{{0, 0}, {1544, 530.5}}</string>
 						<key>ShowLineNumbers</key>
 						<false/>
 						<key>showCodeCoverage</key>
@@ -314,7 +314,7 @@ XWJtdHV3fIeQn6OrAAAAAAAAAQEAAAAAAAAAGAAAAAAAAAAAAAAAAAAAALQ=</string>
 				<key>tabsHidden</key>
 				<false/>
 				<key>windowControllerID</key>
-				<string>3CCE11E6-9D44-4490-BF5F-FDD93607E3E1-64570-000001FA5F3315ED</string>
+				<string>029F64B4-1B74-449C-B8BE-DB201F738411-64570-000002625D42F673</string>
 				<key>windowFrame</key>
 				<string>0 50 1920 1005 0 0 1920 1055 </string>
 			</dict>
@@ -325,7 +325,7 @@ XWJtdHV3fIeQn6OrAAAAAAAAAQEAAAAAAAAAGAAAAAAAAAAAAAAAAAAAALQ=</string>
 				<key>controllerClass</key>
 				<string>SD8ScriptWindowController</string>
 				<key>controllerID</key>
-				<string>3CCE11E6-9D44-4490-BF5F-FDD93607E3E1-64570-000001FA5F3315ED</string>
+				<string>029F64B4-1B74-449C-B8BE-DB201F738411-64570-000002625D42F673</string>
 				<key>controllerState</key>
 				<dict>
 					<key>miniaturized</key>
