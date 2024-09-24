@@ -50,7 +50,7 @@ XWJtdHV3fIeQn6OrAAAAAAAAAQEAAAAAAAAAGAAAAAAAAAAAAAAAAAAAALQ=</string>
 		<real>0.80000001192092896</real>
 		<key>viewControllers</key>
 		<dict>
-			<key>029F64B4-1B74-449C-B8BE-DB201F738411-64570-000002625D42F673</key>
+			<key>4D2F0D2D-A8AB-4173-9C31-CAA7BEBC818C-69880-00003378C569F41A</key>
 			<dict>
 				<key>debuggerViewState</key>
 				<dict>
@@ -275,7 +275,7 @@ XWJtdHV3fIeQn6OrAAAAAAAAAQEAAAAAAAAAGAAAAAAAAAAAAAAAAAAAALQ=</string>
 								<key>length</key>
 								<integer>0</integer>
 								<key>location</key>
-								<integer>372</integer>
+								<integer>371</integer>
 							</dict>
 						</array>
 						<key>LNSTextViewShowInvisibles</key>
@@ -287,7 +287,7 @@ XWJtdHV3fIeQn6OrAAAAAAAAAQEAAAAAAAAAGAAAAAAAAAAAAAAAAAAAALQ=</string>
 						<key>LNSTextViewWrapLines</key>
 						<false/>
 						<key>LNSVisibleRect</key>
-						<string>{{0, 0}, {1544, 530.5}}</string>
+						<string>{{0, 65.5}, {1544, 490.5}}</string>
 						<key>ShowLineNumbers</key>
 						<false/>
 						<key>showCodeCoverage</key>
@@ -314,9 +314,9 @@ XWJtdHV3fIeQn6OrAAAAAAAAAQEAAAAAAAAAGAAAAAAAAAAAAAAAAAAAALQ=</string>
 				<key>tabsHidden</key>
 				<false/>
 				<key>windowControllerID</key>
-				<string>029F64B4-1B74-449C-B8BE-DB201F738411-64570-000002625D42F673</string>
+				<string>4D2F0D2D-A8AB-4173-9C31-CAA7BEBC818C-69880-00003378C569F41A</string>
 				<key>windowFrame</key>
-				<string>0 50 1920 1005 0 0 1920 1055 </string>
+				<string>320 230 1920 1005 0 0 2560 1415 </string>
 			</dict>
 		</dict>
 		<key>windowControllers</key>
@@ -325,7 +325,7 @@ XWJtdHV3fIeQn6OrAAAAAAAAAQEAAAAAAAAAGAAAAAAAAAAAAAAAAAAAALQ=</string>
 				<key>controllerClass</key>
 				<string>SD8ScriptWindowController</string>
 				<key>controllerID</key>
-				<string>029F64B4-1B74-449C-B8BE-DB201F738411-64570-000002625D42F673</string>
+				<string>4D2F0D2D-A8AB-4173-9C31-CAA7BEBC818C-69880-00003378C569F41A</string>
 				<key>controllerState</key>
 				<dict>
 					<key>miniaturized</key>
@@ -333,7 +333,7 @@ XWJtdHV3fIeQn6OrAAAAAAAAAQEAAAAAAAAAGAAAAAAAAAAAAAAAAAAAALQ=</string>
 					<key>timerShowsDetail</key>
 					<false/>
 					<key>windowFrame</key>
-					<string>0 50 1920 1005 0 0 1920 1055 </string>
+					<string>320 230 1920 1005 0 0 2560 1415 </string>
 				</dict>
 			</dict>
 		</array>
