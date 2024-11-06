@@ -6,15 +6,15 @@
 	<dict>
 		<key>Resources/Script Debugger.plist</key>
 		<data>
-		hDla1id4rOiXNvRUdI//hkfjn5g=
+		mSi9nbmdsmCXX4he1pz7q2xaXoA=
 		</data>
 		<key>Resources/Scripts/main.recover.rtf</key>
 		<data>
-		+TZNZ6yTHvuKW9ZZpgCDukJf13c=
+		CLJ+qHaUfUdsasOPO2U3ly2GAIY=
 		</data>
 		<key>Resources/Scripts/main.scpt</key>
 		<data>
-		QIN29c59nnft/ip1ObLXVTTcef0=
+		lrKtBjSeOON2fDlkYfYwAQoVR6s=
 		</data>
 		<key>Resources/applet.icns</key>
 		<data>
@@ -22,11 +22,11 @@
 		</data>
 		<key>Resources/applet.rsrc</key>
 		<data>
-		P8Q9LJLuU7L3kRQdOx1d3GLibWM=
+		NQ7nOIen9pkYt8yizmSP/F/VNfE=
 		</data>
 		<key>Resources/description.rtfd/TXT.rtf</key>
 		<data>
-		zVa782ehNqArcc0CLAK2tfVc5tA=
+		ceHkrN7T1Hg6a54h8thM7mrmky4=
 		</data>
 		<key>Resources/magic-warning-icon.icns</key>
 		<data>
@@ -39,33 +39,33 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			hDla1id4rOiXNvRUdI//hkfjn5g=
+			mSi9nbmdsmCXX4he1pz7q2xaXoA=
 			</data>
 			<key>hash2</key>
 			<data>
-			GKg2P7tYx/uA7sG+4yqW3114nx68LPgcVLEclEw84xg=
+			Vv/t0QRN7nVpT3Y6koDUjBmcVBeViBv0KzSpBSJIrM8=
 			</data>
 		</dict>
 		<key>Resources/Scripts/main.recover.rtf</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			+TZNZ6yTHvuKW9ZZpgCDukJf13c=
+			CLJ+qHaUfUdsasOPO2U3ly2GAIY=
 			</data>
 			<key>hash2</key>
 			<data>
-			Ph8ZU0OPEVfZDi8twiPL6BJufYTi0kemaz0n5I+hTjM=
+			Ip/EsEzd/qgOl+3ipV6VaK9BQ9sao83FF8P15idi+ow=
 			</data>
 		</dict>
 		<key>Resources/Scripts/main.scpt</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			QIN29c59nnft/ip1ObLXVTTcef0=
+			lrKtBjSeOON2fDlkYfYwAQoVR6s=
 			</data>
 			<key>hash2</key>
 			<data>
-			dk1+gSmSrHoeYYmlsOyPtnwf+bXAiCcVcziauJIKSGE=
+			OymSsM9GIMlJp9EghSOVXtCfRoutXTTmlpcukRy8q1w=
 			</data>
 		</dict>
 		<key>Resources/applet.icns</key>
@@ -83,22 +83,22 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			P8Q9LJLuU7L3kRQdOx1d3GLibWM=
+			NQ7nOIen9pkYt8yizmSP/F/VNfE=
 			</data>
 			<key>hash2</key>
 			<data>
-			/1fgs3XGUEVP2lKev6S1XT8ifibcWY2iJzdSKEiO94w=
+			Z6/0Om5nsE7LPTSHLk1Ong6VckV4tv0auYKE3wmNRoQ=
 			</data>
 		</dict>
 		<key>Resources/description.rtfd/TXT.rtf</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			zVa782ehNqArcc0CLAK2tfVc5tA=
+			ceHkrN7T1Hg6a54h8thM7mrmky4=
 			</data>
 			<key>hash2</key>
 			<data>
-			E2Of5u5DgQzKUK7JRt9vkPRgZy0Rfo/8wBH7NBpsx/0=
+			DlmmxSnsXzOQ0Wvdri/C2lE5LJpEvk3Cgi84l1fraL0=
 			</data>
 		</dict>
 		<key>Resources/magic-warning-icon.icns</key>
