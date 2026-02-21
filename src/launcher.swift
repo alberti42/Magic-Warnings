@@ -197,7 +197,6 @@ func ensureLaunchAgentInstalled() {
 // MARK: - Management Dialog
 
 func showManagementDialog() {
-    NSApp.activate(ignoringOtherApps: true)
     let alert = NSAlert()
     alert.messageText = "Magic Warnings — Launcher"
 
