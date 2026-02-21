@@ -158,11 +158,32 @@ func uninstallLaunchAgent() {
     try? FileManager.default.removeItem(at: launchAgentURL)
 }
 
+/// Returns the executable path currently registered in the LaunchAgent plist, or nil if not installed.
+func registeredExecutablePath() -> String? {
+    guard let data = try? Data(contentsOf: launchAgentURL),
+          let obj  = try? PropertyListSerialization.propertyList(from: data, options: [], format: nil),
+          let dict = obj as? [String: Any],
+          let args = dict["ProgramArguments"] as? [String],
+          let path = args.first
+    else { return nil }
+    return path
+}
+
 func ensureLaunchAgentInstalled() {
-    guard !isLaunchAgentInstalled else { return }
-    installLaunchAgent()
-    sendNotification(title: "Magic Warnings",
-                     body:  "Battery monitoring is now active. Checks run every 10 minutes.")
+    switch registeredExecutablePath() {
+    case nil:
+        // Not installed — install and notify the user.
+        installLaunchAgent()
+        sendNotification(title: "Magic Warnings",
+                         body:  "Battery monitoring is now active. Checks run every 10 minutes.")
+    case executableURL.path:
+        // Installed and pointing to the correct binary — nothing to do.
+        break
+    default:
+        // Installed but pointing to a stale path (app was moved) — reinstall silently.
+        uninstallLaunchAgent()
+        installLaunchAgent()
+    }
 }
 
 // MARK: - Management Dialog
