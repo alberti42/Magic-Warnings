@@ -28,7 +28,12 @@ swift:
 	rm "$(APPLET)-arm64" "$(APPLET)-x86_64"
 
 sign:
-	codesign --force --deep --sign "$(DEV_ID)" --options runtime --timestamp "$(APP)"
+	$(eval TMPDIR := $(shell mktemp -d))
+	cp -R "$(APP)" "$(TMPDIR)/"
+	xattr -cr "$(TMPDIR)/$(APP)"
+	codesign --force --deep --sign "$(DEV_ID)" --options runtime --timestamp "$(TMPDIR)/$(APP)"
+	cp -R "$(TMPDIR)/$(APP)/." "$(APP)"
+	rm -rf "$(TMPDIR)"
 
 install: build sign
 	cp -R "$(APP)" "$(INSTALL_DIR)/"
