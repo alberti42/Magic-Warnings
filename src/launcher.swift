@@ -32,20 +32,14 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 }
 
 if !isSilent {
-    // Initialise NSApplication so we can check modifier keys and show alerts.
+    // Initialise NSApplication so we can show alerts.
     _ = NSApplication.shared
     let delegate = AppDelegate()
     NSApp.delegate = delegate
     NSApp.setActivationPolicy(.accessory)
 
-    // Hold Option at launch to manage the LaunchAgent interactively.
-    if NSEvent.modifierFlags.contains(.option) {
-        showManagementDialog()
-        exit(0)
-    }
-
-    // First-run: auto-install the LaunchAgent if it is not yet present.
-    ensureLaunchAgentInstalled()
+    showManagementDialog()
+    exit(0)
 }
 
 runBatteryCheck()
@@ -131,10 +125,6 @@ func sendNotification(title: String, body: String) {
 
 // MARK: - LaunchAgent Management
 
-var isLaunchAgentInstalled: Bool {
-    FileManager.default.fileExists(atPath: launchAgentURL.path)
-}
-
 func installLaunchAgent() {
     let plist: [String: Any] = [
         "Label":            kLaunchAgentLabel,
@@ -177,49 +167,47 @@ func registeredExecutablePath() -> String? {
     return path
 }
 
-func ensureLaunchAgentInstalled() {
-    switch registeredExecutablePath() {
-    case nil:
-        // Not installed — install and notify the user.
-        installLaunchAgent()
-        sendNotification(title: "Magic Warnings",
-                         body:  "Battery monitoring is now active. Checks run every 10 minutes.")
-    case executableURL.path:
-        // Installed and pointing to the correct binary — nothing to do.
-        break
-    default:
-        // Installed but pointing to a stale path (app was moved) — reinstall silently.
-        uninstallLaunchAgent()
-        installLaunchAgent()
-    }
-}
-
 // MARK: - Management Dialog
 
 func showManagementDialog() {
-    let alert = NSAlert()
-    alert.messageText = "Magic Warnings — Launcher"
+    let registeredPath  = registeredExecutablePath()
+    let correctlyInstalled = (registeredPath == executableURL.path)
+    let anyInstalled       = (registeredPath != nil)
 
-    if isLaunchAgentInstalled {
-        alert.informativeText = "The background launcher is installed and checks battery levels every 10 minutes."
-        alert.addButton(withTitle: "Uninstall Launcher")
-        alert.addButton(withTitle: "Cancel")
-        if alert.runModal() == .alertFirstButtonReturn {
-            uninstallLaunchAgent()
-            try? FileManager.default.removeItem(at: prefsURL)
-            let confirmation = NSAlert()
-            confirmation.messageText = "Launcher Uninstalled"
-            confirmation.informativeText = "The background launcher has been removed. You can now drag Magic Warnings to the Trash to complete the uninstallation."
-            confirmation.addButton(withTitle: "OK")
-            confirmation.runModal()
-        }
+    let statusText: String
+    if correctlyInstalled {
+        statusText = "installed"
+    } else if anyInstalled {
+        statusText = "installed (pointing to a different location)"
     } else {
-        alert.informativeText = "The background launcher is not installed. Install it to monitor battery levels every 10 minutes automatically."
-        alert.addButton(withTitle: "Install Launcher")
-        alert.addButton(withTitle: "Cancel")
-        if alert.runModal() == .alertFirstButtonReturn {
-            installLaunchAgent()
-        }
+        statusText = "not installed yet"
+    }
+
+    let alert = NSAlert()
+    alert.messageText    = "Magic Warnings"
+    alert.informativeText = "Launcher automatically executed every 10 minutes: \(statusText)."
+
+    let installTitle = anyInstalled ? "Reinstall Launcher" : "Install Launcher"
+    alert.addButton(withTitle: installTitle)       // button index 0
+    alert.addButton(withTitle: "Uninstall Launcher") // button index 1
+    alert.addButton(withTitle: "Quit")               // button index 2
+
+    alert.buttons[0].isEnabled = !correctlyInstalled
+    alert.buttons[1].isEnabled = anyInstalled
+
+    switch alert.runModal() {
+    case .alertFirstButtonReturn:   // Install / Reinstall
+        if anyInstalled { uninstallLaunchAgent() }
+        installLaunchAgent()
+        sendNotification(title: "Magic Warnings",
+                         body:  "Battery monitoring is now active. Checks run every 10 minutes.")
+    case .alertSecondButtonReturn:  // Uninstall
+        uninstallLaunchAgent()
+        try? FileManager.default.removeItem(at: prefsURL)
+        sendNotification(title: "Magic Warnings",
+                         body:  "Battery monitoring has been disabled.")
+    default:                        // Quit
+        break
     }
 }
 
