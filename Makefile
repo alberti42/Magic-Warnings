@@ -2,7 +2,6 @@ SRC        := src
 APP        := Magic Warnings.app
 APPLET_DIR := $(APP)/Contents/MacOS
 APPLET     := $(APPLET_DIR)/applet
-SCRIPT     := $(APP)/Contents/Resources/Scripts/main.scpt
 
 LAUNCH_AGENT_LABEL := com.alberti42.magic-warnings-launcher
 LAUNCH_AGENTS_DIR  := $(HOME)/Library/LaunchAgents
@@ -15,11 +14,11 @@ DEV_ID := Developer ID Application: Andrea Alberti (9V3X7C8VCK)
 
 PLIST := $(APP)/Contents/Info.plist
 
-.PHONY: all build swift applescript sign install install-agent uninstall-agent version
+.PHONY: all build swift sign install install-agent uninstall-agent version
 
 all: build sign
 
-build: swift applescript
+build: swift
 
 swift:
 	mkdir -p "$(APPLET_DIR)"
@@ -27,9 +26,6 @@ swift:
 	swiftc -target x86_64-apple-macosx10.13 "$(SRC)/launcher.swift" -o "$(APPLET)-x86_64"
 	lipo -create -output "$(APPLET)" "$(APPLET)-arm64" "$(APPLET)-x86_64"
 	rm "$(APPLET)-arm64" "$(APPLET)-x86_64"
-
-applescript:
-	osacompile -o "$(SCRIPT)" "$(SRC)/main.applescript"
 
 sign:
 	codesign --force --deep --sign "$(DEV_ID)" --options runtime --timestamp "$(APP)"

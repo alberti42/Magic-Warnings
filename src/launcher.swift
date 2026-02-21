@@ -1,31 +1,227 @@
 import Foundation
+import AppKit
 
-// Swift launcher replacing the standard AppleScript `applet` binary.
-// Runs main.scpt via NSAppleScript with no modifier-key detection,
-// no startup screen, and no Run/Stop dialog.
+// MARK: - Configuration
+
+let kThreshold            = 20     // battery % below which to warn
+let kSuppressionHours     = 6.0    // hours before repeating a warning for the same device
+let kCheckInterval        = 600    // seconds between background checks (written into LaunchAgent plist)
+let kBundleID             = "org.alberti42.magic-warnings"
+let kLaunchAgentLabel     = "com.alberti42.magic-warnings-launcher"
+
+// MARK: - Paths
 
 let executableURL = URL(fileURLWithPath: CommandLine.arguments[0])
     .standardizedFileURL
     .resolvingSymlinksInPath()
 
-// Executable: .../Magic Warnings.app/Contents/MacOS/applet
-// Script:     .../Magic Warnings.app/Contents/Resources/Scripts/main.scpt
-let scriptURL = executableURL
-    .deletingLastPathComponent()    // → Contents/MacOS/
-    .deletingLastPathComponent()    // → Contents/
-    .appendingPathComponent("Resources/Scripts/main.scpt")
+// executableURL: .../Magic Warnings.app/Contents/MacOS/applet
+let appBundleURL = executableURL
+    .deletingLastPathComponent()   // → Contents/MacOS/
+    .deletingLastPathComponent()   // → Contents/
+    .deletingLastPathComponent()   // → Magic Warnings.app/
 
-var loadError: NSDictionary?
-guard let script = NSAppleScript(contentsOf: scriptURL, error: &loadError) else {
-    fputs("Magic Warnings: failed to load '\(scriptURL.path)': \(loadError ?? [:])\n", stderr)
-    exit(1)
+let home           = FileManager.default.homeDirectoryForCurrentUser
+let prefsURL       = home.appendingPathComponent("Library/Preferences/\(kBundleID).plist")
+let launchAgentURL = home.appendingPathComponent("Library/LaunchAgents/\(kLaunchAgentLabel).plist")
+
+// MARK: - Arguments
+
+let isSilent = CommandLine.arguments.contains("--silent")
+
+// MARK: - Entry Point
+
+// Trash detection: if the app was moved to the Trash, silently uninstall the LaunchAgent and exit.
+if appBundleURL.path.contains("/.Trash/") {
+    uninstallLaunchAgent()
+    exit(0)
 }
 
-var execError: NSDictionary?
-script.executeAndReturnError(&execError)
+if !isSilent {
+    // Initialise NSApplication so we can check modifier keys and show alerts.
+    _ = NSApplication.shared
+    NSApp.setActivationPolicy(.accessory)
 
-if let error = execError {
-    let msg = (error[NSAppleScript.errorMessage] as? String) ?? String(describing: error)
-    fputs("Magic Warnings: \(msg)\n", stderr)
-    exit(1)
+    // Hold Option at launch to manage the LaunchAgent interactively.
+    if NSEvent.modifierFlags.contains(.option) {
+        showManagementDialog()
+        exit(0)
+    }
+
+    // First-run: auto-install the LaunchAgent if it is not yet present.
+    ensureLaunchAgentInstalled()
+}
+
+runBatteryCheck()
+
+// MARK: - Battery Monitoring
+
+func runBatteryCheck() {
+    var timestamps = loadTimestamps()
+
+    let output = run("/usr/sbin/ioreg",
+                     args: ["-c", "AppleDeviceManagementHIDEventService", "-r", "-l"])
+
+    var transport    = ""
+    var product      = ""
+    var serialNumber = ""
+
+    for line in output.components(separatedBy: "\n") {
+
+        // New device block — reset state.
+        if line.contains("+-o") {
+            transport    = ""
+            product      = ""
+            serialNumber = ""
+            continue
+        }
+
+        if line.contains("\"Transport\"") {
+            transport = extractValue(from: line)
+        }
+
+        // Only monitor Bluetooth devices; USB means the device is charging.
+        guard transport == "Bluetooth" else { continue }
+
+        if line.contains("\"Product\"") {
+            product = extractValue(from: line)
+        } else if line.contains("\"SerialNumber\"") {
+            serialNumber = extractValue(from: line)
+        } else if line.contains("\"BatteryPercent\""), !serialNumber.isEmpty {
+            let raw = extractValue(from: line)
+            guard let percent = Int(raw.filter(\.isNumber)) else { continue }
+
+            if percent <= kThreshold && timestamps[serialNumber] == nil {
+                sendNotification(title: "\(product) battery low",
+                                 body:  "Battery status: \(percent)%")
+                timestamps[serialNumber] = Date()
+            }
+        }
+    }
+
+    saveTimestamps(timestamps)
+}
+
+// MARK: - Timestamp Persistence
+
+func loadTimestamps() -> [String: Date] {
+    guard FileManager.default.fileExists(atPath: prefsURL.path),
+          let data = try? Data(contentsOf: prefsURL),
+          let obj  = try? PropertyListSerialization.propertyList(from: data, options: [], format: nil),
+          let dict = obj as? [String: Date]
+    else { return [:] }
+
+    // Drop entries that are older than the suppression window.
+    let cutoff = Date().addingTimeInterval(-kSuppressionHours * 3600)
+    return dict.filter { $0.value > cutoff }
+}
+
+func saveTimestamps(_ timestamps: [String: Date]) {
+    guard let data = try? PropertyListSerialization.data(
+        fromPropertyList: timestamps, format: .xml, options: 0
+    ) else { return }
+    try? data.write(to: prefsURL)
+}
+
+// MARK: - Notifications
+
+func sendNotification(title: String, body: String) {
+    // Route through osascript so the notification is attributed to the app bundle.
+    let safeTitle = title.replacingOccurrences(of: "\"", with: "\\\"")
+    let safeBody  = body.replacingOccurrences(of:  "\"", with: "\\\"")
+    run("/usr/bin/osascript",
+        args: ["-e", "display notification \"\(safeBody)\" with title \"\(safeTitle)\""])
+}
+
+// MARK: - LaunchAgent Management
+
+var isLaunchAgentInstalled: Bool {
+    FileManager.default.fileExists(atPath: launchAgentURL.path)
+}
+
+func installLaunchAgent() {
+    let plist: [String: Any] = [
+        "Label":            kLaunchAgentLabel,
+        "ProgramArguments": [executableURL.path, "--silent"],
+        "StartInterval":    kCheckInterval,
+        "RunAtLoad":        true,
+        "LowPriorityIO":    true,
+        "EnvironmentVariables": [
+            "LANG": "en_US.UTF-8",
+            "PATH": "/usr/bin:/bin:/usr/sbin:/sbin"
+        ]
+    ]
+    guard let data = try? PropertyListSerialization.data(
+        fromPropertyList: plist, format: .xml, options: 0
+    ) else { return }
+
+    let dir = launchAgentURL.deletingLastPathComponent()
+    try? FileManager.default.createDirectory(at: dir, withIntermediateDirectories: true)
+    try? data.write(to: launchAgentURL)
+
+    let uid = String(getuid())
+    run("/bin/launchctl", args: ["bootstrap", "gui/\(uid)", launchAgentURL.path])
+    run("/bin/launchctl", args: ["kickstart", "-k", "gui/\(uid)/\(kLaunchAgentLabel)"])
+}
+
+func uninstallLaunchAgent() {
+    let uid = String(getuid())
+    run("/bin/launchctl", args: ["bootout", "gui/\(uid)/\(kLaunchAgentLabel)"])
+    try? FileManager.default.removeItem(at: launchAgentURL)
+}
+
+func ensureLaunchAgentInstalled() {
+    guard !isLaunchAgentInstalled else { return }
+    installLaunchAgent()
+    sendNotification(title: "Magic Warnings",
+                     body:  "Battery monitoring is now active. Checks run every 10 minutes.")
+}
+
+// MARK: - Management Dialog
+
+func showManagementDialog() {
+    NSApp.activate(ignoringOtherApps: true)
+    let alert = NSAlert()
+    alert.messageText = "Magic Warnings — Launcher"
+
+    if isLaunchAgentInstalled {
+        alert.informativeText = "The background launcher is installed and checks battery levels every 10 minutes."
+        alert.addButton(withTitle: "Uninstall Launcher")
+        alert.addButton(withTitle: "Cancel")
+        if alert.runModal() == .alertFirstButtonReturn {
+            uninstallLaunchAgent()
+        }
+    } else {
+        alert.informativeText = "The background launcher is not installed. Install it to monitor battery levels every 10 minutes automatically."
+        alert.addButton(withTitle: "Install Launcher")
+        alert.addButton(withTitle: "Cancel")
+        if alert.runModal() == .alertFirstButtonReturn {
+            installLaunchAgent()
+        }
+    }
+}
+
+// MARK: - Helpers
+
+/// Run an executable with arguments, returning its standard output.
+@discardableResult
+func run(_ path: String, args: [String] = []) -> String {
+    let task = Process()
+    let pipe = Pipe()
+    task.standardOutput = pipe
+    task.standardError  = Pipe()
+    task.executableURL  = URL(fileURLWithPath: path)
+    task.arguments      = args
+    try? task.run()
+    task.waitUntilExit()
+    return String(data: pipe.fileHandleForReading.readDataToEndOfFile(), encoding: .utf8) ?? ""
+}
+
+/// Extract the value from an ioreg line of the form `  "Key" = "value"` or `  "Key" = 42`.
+func extractValue(from line: String) -> String {
+    guard let range = line.range(of: " = ") else { return "" }
+    var value = String(line[range.upperBound...]).trimmingCharacters(in: .whitespaces)
+    if value.hasPrefix("\"") { value = String(value.dropFirst()) }
+    if value.hasSuffix("\"") { value = String(value.dropLast()) }
+    return value
 }
