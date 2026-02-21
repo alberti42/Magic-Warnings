@@ -7,8 +7,8 @@ import UserNotifications
 let kThreshold            = 20     // battery % below which to warn
 let kSuppressionHours     = 6.0    // hours before repeating a warning for the same device
 let kCheckInterval        = 600    // seconds between background checks (written into LaunchAgent plist)
-let kBundleID             = "org.alberti42.magic-warnings"
-let kLaunchAgentLabel     = "com.alberti42.magic-warnings-launcher"
+let kBundleID             = "io.alberti42.magic-warnings"
+let kLaunchAgentLabel     = "io.alberti42.magic-warnings-launcher"
 
 // MARK: - Paths
 

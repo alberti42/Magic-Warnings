@@ -12,6 +12,7 @@
 - Sends a system notification when any device battery drops below 20%.
 - Checks battery levels automatically every 10 minutes.
 - Repeats the warning every 6 hours if the battery remains low.
+- Code-signed and notarized by Apple — no security warnings on first launch.
 
 ---
 
@@ -19,18 +20,13 @@
 
 1. Download the latest `.zip` from the [Releases](https://github.com/alberti42/Magic-Warnings/releases) page, extract it, and move `Magic Warnings.app` to your `/Applications` folder.
 
-2. Remove the macOS quarantine flag:
-   ```bash
-   xattr -d com.apple.quarantine /Applications/Magic\ Warnings.app
-   ```
+2. Launch the app. On first launch it automatically installs a background agent that runs every 10 minutes — no extra steps needed.
 
-3. Launch the app. On first launch it automatically installs a background agent that runs every 10 minutes — no extra steps needed.
-
-4. When prompted, enable notifications for **Magic Warnings** in System Settings → Notifications:
+3. When prompted, enable notifications for **Magic Warnings** in System Settings → Notifications:
 
    <img src="./Graphics/messages_authorization.jpg" alt="Notifications settings" style="width:400px;"/>
 
-5. *(Optional)* Allow notifications in Focus modes:
+4. *(Optional)* Allow notifications in Focus modes:
 
    <img src="./Graphics/focus_configuration.jpg" width=512 alt="Focus mode configuration"/>
 

@@ -12,7 +12,7 @@
 		<string>/usr/bin:/bin:/usr/sbin:/sbin</string>
 	</dict>
 	<key>Label</key>
-	<string>com.alberti42.magic-warnings-launcher</string>
+	<string>io.alberti42.magic-warnings-launcher</string>
 	<key>LowPriorityIO</key>
 	<true/>
 	<key>ProgramArguments</key>

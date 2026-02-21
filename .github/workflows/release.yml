@@ -50,7 +50,23 @@ jobs:
       - name: Package
         run: |
           VERSION="${GITHUB_REF_NAME#v}"
-          zip -r "Magic-Warnings-${VERSION}.zip" "Magic Warnings.app"
+          ditto -c -k --keepParent "Magic Warnings.app" "Magic-Warnings-${VERSION}.zip"
+
+      - name: Notarize
+        env:
+          APPLE_ID: ${{ secrets.APPLE_ID }}
+          APPLE_ID_PASSWORD: ${{ secrets.APPLE_ID_PASSWORD }}
+        run: |
+          VERSION="${GITHUB_REF_NAME#v}"
+          xcrun notarytool store-credentials "notary-profile" \
+            --apple-id "$APPLE_ID" \
+            --password "$APPLE_ID_PASSWORD" \
+            --team-id  "9V3X7C8VCK"
+          xcrun notarytool submit "Magic-Warnings-${VERSION}.zip" \
+            --keychain-profile "notary-profile" \
+            --wait
+          xcrun stapler staple "Magic Warnings.app"
+          ditto -c -k --keepParent "Magic Warnings.app" "Magic-Warnings-${VERSION}.zip"
 
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2

@@ -9,7 +9,7 @@
 	<key>CFBundleIconFile</key>
 	<string>magic-warning-icon</string>
 	<key>CFBundleIdentifier</key>
-	<string>org.alberti42.magic-warnings</string>
+	<string>io.alberti42.magic-warnings</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
