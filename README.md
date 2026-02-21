@@ -48,7 +48,7 @@ After uninstalling the launcher you can move `Magic Warnings.app` to the Trash a
 
 If you find **Magic Warnings** useful, consider buying me a coffee!
 
-[<img src="docs/images/buy_me_coffee.png" alt="Buy Me a Coffee"/>](https://buymeacoffee.com/alberti)
+[<img src="./Graphics/buy_me_coffee.png" alt="Buy Me a Coffee" width=200/>](https://buymeacoffee.com/alberti)
 
 ---
 
