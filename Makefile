@@ -1,7 +1,8 @@
-SRC    := src
-APP    := Magic Warnings.app
-APPLET := $(APP)/Contents/MacOS/applet
-SCRIPT := $(APP)/Contents/Resources/Scripts/main.scpt
+SRC        := src
+APP        := Magic Warnings.app
+APPLET_DIR := $(APP)/Contents/MacOS
+APPLET     := $(APPLET_DIR)/applet
+SCRIPT     := $(APP)/Contents/Resources/Scripts/main.scpt
 
 LAUNCH_AGENT_LABEL := com.alberti42.magic-warnings-launcher
 LAUNCH_AGENTS_DIR  := $(HOME)/Library/LaunchAgents
@@ -19,13 +20,14 @@ all: build sign
 build: swift applescript
 
 swift:
+	mkdir -p "$(APPLET_DIR)"
 	swiftc "$(SRC)/launcher.swift" -o "$(APPLET)"
 
 applescript:
 	osacompile -o "$(SCRIPT)" "$(SRC)/main.applescript"
 
 sign:
-	codesign --force --deep --options runtime --sign "$(DEV_ID)" "$(APP)"
+	codesign --force --deep --sign "$(DEV_ID)" --options runtime --timestamp "$(APP)"
 
 install: build sign
 	cp -R "$(APP)" "$(INSTALL_DIR)/"
