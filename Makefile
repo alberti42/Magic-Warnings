@@ -16,9 +16,10 @@ TEAM_ID        := 9V3X7C8VCK
 DEV_ID         := Developer ID Application: Andrea Alberti ($(TEAM_ID))
 NOTARY_PROFILE ?= notary-profile
 
-PLIST   := $(APP)/Contents/Info.plist
-VERSION := $(shell /usr/libexec/PlistBuddy -c "Print :CFBundleShortVersionString" "$(PLIST)" 2>/dev/null)
-ZIP     := Magic-Warnings-$(VERSION).zip
+PLIST    := $(APP)/Contents/Info.plist
+VERSION  := $(shell /usr/libexec/PlistBuddy -c "Print :CFBundleShortVersionString" "$(PLIST)" 2>/dev/null)
+DIST_DIR := dist
+ZIP      := $(DIST_DIR)/Magic-Warnings-$(VERSION).zip
 
 .PHONY: all build swift sign notarize verify install install-agent uninstall-agent version release
 
@@ -42,6 +43,7 @@ sign:
 	rm -rf "$(TMPDIR)"
 
 notarize:
+	mkdir -p "$(DIST_DIR)"
 	ditto -c -k --keepParent "$(APP)" "$(ZIP)"
 	xcrun notarytool submit "$(ZIP)" \
 	  --keychain-profile "$(NOTARY_PROFILE)" \

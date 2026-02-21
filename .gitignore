@@ -1,3 +1,5 @@
 Magic Warnings.app/Contents/MacOS/applet
-Magic Warnings.app/Contents/_CodeSignature/*
+Magic Warnings.app/Contents/_CodeSignature
+Magic Warnings.app/Contents/CodeResources
+dist/
 .env
