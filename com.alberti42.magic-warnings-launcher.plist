@@ -12,7 +12,7 @@
 		<string>/usr/bin:/bin:/usr/sbin:/sbin</string>
 	</dict>
 	<key>Label</key>
-	<string>Warning for low battery of Magic devices</string>
+	<string>com.alberti42.magic-warnings-launcher</string>
 	<key>LowPriorityIO</key>
 	<true/>
 	<key>ProgramArguments</key>
