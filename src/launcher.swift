@@ -170,34 +170,30 @@ func registeredExecutablePath() -> String? {
 // MARK: - Management Dialog
 
 func showManagementDialog() {
-    let registeredPath  = registeredExecutablePath()
-    let correctlyInstalled = (registeredPath == executableURL.path)
-    let anyInstalled       = (registeredPath != nil)
+    let registeredPath = registeredExecutablePath()
 
-    let statusText: String
-    if correctlyInstalled {
-        statusText = "installed"
-    } else if anyInstalled {
-        statusText = "installed (pointing to a different location)"
-    } else {
-        statusText = "not installed yet"
+    // If the launcher exists but points to a stale path (app was moved), remove it silently.
+    if let path = registeredPath, path != executableURL.path {
+        uninstallLaunchAgent()
     }
+
+    let correctlyInstalled = (registeredPath == executableURL.path)
+
+    let statusText = correctlyInstalled ? "installed" : "not installed yet"
 
     let alert = NSAlert()
     alert.messageText    = "Magic Warnings"
     alert.informativeText = "Launcher automatically executed every 10 minutes: \(statusText)."
 
-    let installTitle = anyInstalled ? "Reinstall Launcher" : "Install Launcher"
-    alert.addButton(withTitle: installTitle)       // button index 0
+    alert.addButton(withTitle: "Install Launcher")   // button index 0
     alert.addButton(withTitle: "Uninstall Launcher") // button index 1
     alert.addButton(withTitle: "Quit")               // button index 2
 
     alert.buttons[0].isEnabled = !correctlyInstalled
-    alert.buttons[1].isEnabled = anyInstalled
+    alert.buttons[1].isEnabled = correctlyInstalled
 
     switch alert.runModal() {
-    case .alertFirstButtonReturn:   // Install / Reinstall
-        if anyInstalled { uninstallLaunchAgent() }
+    case .alertFirstButtonReturn:   // Install
         installLaunchAgent()
         sendNotification(title: "Magic Warnings",
                          body:  "Battery monitoring is now active. Checks run every 10 minutes.")
