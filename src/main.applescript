@@ -13,7 +13,7 @@ property disableWarningBeforeSoManyHoursHavePassed : 6
 property threshold : 20
 
 -- Path to the file where the dictionary will be saved in the user's ~/Library/Preferences/
-property storageFilePath : POSIX path of (path to library folder from user domain) & "Preferences/org.alberti42.magic-warnings.plist"
+property storageFilePath : POSIX path of (path to library folder from user domain) & "Preferences/com.alberti42.magic-warnings.plist"
 
 -- Dictionary to store the last notification time for each device by serial number
 global lastNotificationTimes

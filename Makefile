@@ -13,7 +13,9 @@ INSTALL_DIR := /Applications
 
 DEV_ID := Developer ID Application: Andrea Alberti (9V3X7C8VCK)
 
-.PHONY: all build swift applescript sign install install-agent uninstall-agent
+PLIST := $(APP)/Contents/Info.plist
+
+.PHONY: all build swift applescript sign install install-agent uninstall-agent version
 
 all: build sign
 
@@ -39,3 +41,8 @@ install-agent:
 uninstall-agent:
 	launchctl unload "$(PLIST_DEST)"
 	rm -f "$(PLIST_DEST)"
+
+version:
+	@[ -n "$(VERSION)" ] || { echo "Usage: make version VERSION=x.y.z"; exit 1; }
+	/usr/libexec/PlistBuddy -c "Set :CFBundleShortVersionString $(VERSION)" "$(PLIST)"
+	@echo "Version set to $(VERSION)"
