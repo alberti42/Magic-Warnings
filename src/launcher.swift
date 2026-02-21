@@ -15,12 +15,6 @@ let executableURL = URL(fileURLWithPath: CommandLine.arguments[0])
     .standardizedFileURL
     .resolvingSymlinksInPath()
 
-// executableURL: .../Magic Warnings.app/Contents/MacOS/applet
-let appBundleURL = executableURL
-    .deletingLastPathComponent()   // → Contents/MacOS/
-    .deletingLastPathComponent()   // → Contents/
-    .deletingLastPathComponent()   // → Magic Warnings.app/
-
 let home           = FileManager.default.homeDirectoryForCurrentUser
 let prefsURL       = home.appendingPathComponent("Library/Preferences/\(kBundleID).plist")
 let launchAgentURL = home.appendingPathComponent("Library/LaunchAgents/\(kLaunchAgentLabel).plist")
@@ -30,12 +24,6 @@ let launchAgentURL = home.appendingPathComponent("Library/LaunchAgents/\(kLaunch
 let isSilent = CommandLine.arguments.contains("--silent")
 
 // MARK: - Entry Point
-
-// Trash detection: if the app was moved to the Trash, silently uninstall the LaunchAgent and exit.
-if appBundleURL.path.contains("/.Trash/") {
-    uninstallLaunchAgent()
-    exit(0)
-}
 
 if !isSilent {
     // Initialise NSApplication so we can check modifier keys and show alerts.
