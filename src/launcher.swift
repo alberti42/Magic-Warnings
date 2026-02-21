@@ -199,6 +199,12 @@ func showManagementDialog() {
         alert.addButton(withTitle: "Cancel")
         if alert.runModal() == .alertFirstButtonReturn {
             uninstallLaunchAgent()
+            try? FileManager.default.removeItem(at: prefsURL)
+            let confirmation = NSAlert()
+            confirmation.messageText = "Launcher Uninstalled"
+            confirmation.informativeText = "The background launcher has been removed. You can now drag Magic Warnings to the Trash to complete the uninstallation."
+            confirmation.addButton(withTitle: "OK")
+            confirmation.runModal()
         }
     } else {
         alert.informativeText = "The background launcher is not installed. Install it to monitor battery levels every 10 minutes automatically."
