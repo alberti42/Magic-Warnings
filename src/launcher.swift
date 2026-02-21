@@ -25,9 +25,17 @@ let isSilent = CommandLine.arguments.contains("--silent")
 
 // MARK: - Entry Point
 
+// Minimal delegate to suppress the default open-file panel that NSApplication
+// shows when activated without a document-based setup.
+class AppDelegate: NSObject, NSApplicationDelegate {
+    func applicationShouldOpenUntitledFile(_ sender: NSApplication) -> Bool { false }
+}
+
 if !isSilent {
     // Initialise NSApplication so we can check modifier keys and show alerts.
     _ = NSApplication.shared
+    let delegate = AppDelegate()
+    NSApp.delegate = delegate
     NSApp.setActivationPolicy(.accessory)
 
     // Hold Option at launch to manage the LaunchAgent interactively.
