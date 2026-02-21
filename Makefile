@@ -14,7 +14,7 @@ DEV_ID := Developer ID Application: Andrea Alberti (9V3X7C8VCK)
 
 PLIST := $(APP)/Contents/Info.plist
 
-.PHONY: all build swift sign install install-agent uninstall-agent version
+.PHONY: all build swift sign install install-agent uninstall-agent version release
 
 all: build sign
 
@@ -46,6 +46,15 @@ install-agent:
 uninstall-agent:
 	launchctl bootout gui/$$(id -u)/$(LAUNCH_AGENT_LABEL)
 	rm -f "$(PLIST_DEST)"
+
+release:
+	@TAG=$$(git describe --tags --abbrev=0 2>/dev/null); \
+	[ -n "$$TAG" ] || { echo "Error: no git tags found"; exit 1; }; \
+	printf "Promote pre-release $$TAG to full release? [y/N] "; \
+	read CONFIRM; \
+	[ "$$CONFIRM" = "y" ] || { echo "Aborted."; exit 1; }; \
+	gh release edit "$$TAG" --prerelease=false --draft=false --latest; \
+	echo "$$TAG is now the latest release."
 
 version:
 	@TAG=$$(git describe --tags --abbrev=0 2>/dev/null); \
