@@ -43,6 +43,10 @@ uninstall-agent:
 	rm -f "$(PLIST_DEST)"
 
 version:
-	@[ -n "$(VERSION)" ] || { echo "Usage: make version VERSION=x.y.z"; exit 1; }
-	/usr/libexec/PlistBuddy -c "Set :CFBundleShortVersionString $(VERSION)" "$(PLIST)"
-	@echo "Version set to $(VERSION)"
+	@TAG=$$(git describe --tags --abbrev=0 2>/dev/null); \
+	[ -n "$$TAG" ] || { echo "Error: no git tags found"; exit 1; }; \
+	VERSION=$${TAG#v}; \
+	/usr/libexec/PlistBuddy -c "Set :CFBundleShortVersionString $$VERSION" "$(PLIST)"; \
+	touch "release-notes/$$TAG.md"; \
+	echo "Version set to $$VERSION"; \
+	echo "Edit release-notes/$$TAG.md before pushing the tag"
