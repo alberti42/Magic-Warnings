@@ -39,10 +39,11 @@ install: build sign
 
 install-agent:
 	cp "$(PLIST_SRC)" "$(PLIST_DEST)"
-	launchctl load "$(PLIST_DEST)"
+	launchctl bootstrap gui/$$(id -u) "$(PLIST_DEST)"
+	launchctl kickstart -k gui/$$(id -u)/$(LAUNCH_AGENT_LABEL)
 
 uninstall-agent:
-	launchctl unload "$(PLIST_DEST)"
+	launchctl bootout gui/$$(id -u)/$(LAUNCH_AGENT_LABEL)
 	rm -f "$(PLIST_DEST)"
 
 version:
