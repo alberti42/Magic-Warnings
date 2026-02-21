@@ -23,7 +23,7 @@ build: swift
 swift:
 	mkdir -p "$(APPLET_DIR)"
 	swiftc -target arm64-apple-macosx11.0   "$(SRC)/launcher.swift" -o "$(APPLET)-arm64"
-	swiftc -target x86_64-apple-macosx10.13 "$(SRC)/launcher.swift" -o "$(APPLET)-x86_64"
+	swiftc -target x86_64-apple-macosx10.14 "$(SRC)/launcher.swift" -o "$(APPLET)-x86_64"
 	lipo -create -output "$(APPLET)" "$(APPLET)-arm64" "$(APPLET)-x86_64"
 	rm "$(APPLET)-arm64" "$(APPLET)-x86_64"
 

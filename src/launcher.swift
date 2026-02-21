@@ -1,5 +1,6 @@
 import Foundation
 import AppKit
+import UserNotifications
 
 // MARK: - Configuration
 
@@ -29,13 +30,17 @@ let isSilent = CommandLine.arguments.contains("--silent")
 // shows when activated without a document-based setup.
 class AppDelegate: NSObject, NSApplicationDelegate {
     func applicationShouldOpenUntitledFile(_ sender: NSApplication) -> Bool { false }
+    func applicationShouldHandleReopen(_ sender: NSApplication, hasVisibleWindows flag: Bool) -> Bool { false }
 }
 
+// Stored at module level so ARC never releases it while NSApp holds only a weak reference.
+let appDelegate = AppDelegate()
+
 if !isSilent {
-    // Initialise NSApplication so we can show alerts.
+    // Assign the delegate before the run loop starts so that finishLaunching
+    // cannot call applicationShouldOpenUntitledFile with no delegate in place.
     _ = NSApplication.shared
-    let delegate = AppDelegate()
-    NSApp.delegate = delegate
+    NSApp.delegate = appDelegate
     NSApp.setActivationPolicy(.accessory)
 
     showManagementDialog()
@@ -116,11 +121,22 @@ func saveTimestamps(_ timestamps: [String: Date]) {
 // MARK: - Notifications
 
 func sendNotification(title: String, body: String) {
-    // Route through osascript so the notification is attributed to the app bundle.
-    let safeTitle = title.replacingOccurrences(of: "\"", with: "\\\"")
-    let safeBody  = body.replacingOccurrences(of:  "\"", with: "\\\"")
-    run("/usr/bin/osascript",
-        args: ["-e", "display notification \"\(safeBody)\" with title \"\(safeTitle)\""])
+    // UNUserNotificationCenter attributes the notification to the app bundle,
+    // so the app icon is shown instead of the Script Editor icon.
+    let center  = UNUserNotificationCenter.current()
+    let sema    = DispatchSemaphore(value: 0)
+
+    center.requestAuthorization(options: [.alert, .sound]) { granted, _ in
+        guard granted else { sema.signal(); return }
+        let content   = UNMutableNotificationContent()
+        content.title = title
+        content.body  = body
+        center.add(UNNotificationRequest(identifier: UUID().uuidString,
+                                         content: content, trigger: nil)) { _ in
+            sema.signal()
+        }
+    }
+    sema.wait()
 }
 
 // MARK: - LaunchAgent Management
