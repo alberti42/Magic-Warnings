@@ -54,6 +54,7 @@ jobs:
         with:
           files: Magic-Warnings-*.zip
           body_path: release-notes/${{ github.ref_name }}.md
+          prerelease: true
 
       - name: Clean up keychain
         if: always()
