@@ -22,7 +22,14 @@ let launchAgentURL = home.appendingPathComponent("Library/LaunchAgents/\(kLaunch
 
 // MARK: - Arguments
 
-let isSilent = CommandLine.arguments.contains("--silent")
+let isSilent  = CommandLine.arguments.contains("--silent")
+let isLogging = CommandLine.arguments.contains("--log")
+
+func log(_ message: String) {
+    guard isLogging else { return }
+    print(message)
+    fflush(stdout)
+}
 
 // MARK: - Entry Point
 
@@ -52,14 +59,21 @@ runBatteryCheck()
 // MARK: - Battery Monitoring
 
 func runBatteryCheck() {
+    log("=== Magic Warnings battery check started ===")
     var timestamps = loadTimestamps()
 
+    log("Running: /usr/sbin/ioreg -c AppleDeviceManagementHIDEventService -r -l")
     let output = run("/usr/sbin/ioreg",
                      args: ["-c", "AppleDeviceManagementHIDEventService", "-r", "-l"])
+
+    if output.isEmpty {
+        log("WARNING: ioreg returned empty output")
+    }
 
     var transport    = ""
     var product      = ""
     var serialNumber = ""
+    var deviceCount  = 0
 
     for line in output.components(separatedBy: "\n") {
 
@@ -68,47 +82,84 @@ func runBatteryCheck() {
             transport    = ""
             product      = ""
             serialNumber = ""
+            deviceCount += 1
             continue
         }
 
+        // Collect all four fields unconditionally — ioreg lists properties
+        // alphabetically, so BatteryPercent/Product/SerialNumber appear
+        // before Transport and must be captured before the Bluetooth check.
         if line.contains("\"Transport\"") {
             transport = extractValue(from: line)
-        }
-
-        // Only monitor Bluetooth devices; USB means the device is charging.
-        guard transport == "Bluetooth" else { continue }
-
-        if line.contains("\"Product\"") {
+            log("Device #\(deviceCount): Transport = \"\(transport)\"")
+        } else if line.contains("\"Product\"") {
             product = extractValue(from: line)
+            log("Device #\(deviceCount): Product = \"\(product)\"")
         } else if line.contains("\"SerialNumber\"") {
             serialNumber = extractValue(from: line)
-        } else if line.contains("\"BatteryPercent\""), !serialNumber.isEmpty {
+            log("Device #\(deviceCount): SerialNumber = \"\(serialNumber)\"")
+        } else if line.contains("\"BatteryPercent\"") {
             let raw = extractValue(from: line)
-            guard let percent = Int(raw.filter(\.isNumber)) else { continue }
+            guard let percent = Int(raw.filter(\.isNumber)) else {
+                log("Device #\(deviceCount): BatteryPercent: could not parse value \"\(raw)\"")
+                continue
+            }
+            log("Device #\(deviceCount): BatteryPercent = \(percent)%")
 
-            if percent <= kThreshold && timestamps[serialNumber] == nil {
-                sendNotification(title: "\(product) battery low",
-                                 body:  "Battery status: \(percent)%")
-                timestamps[serialNumber] = Date()
+            // Only act on Bluetooth devices; USB means the device is charging.
+            guard transport == "Bluetooth" else {
+                log("  → skipped (Transport = \"\(transport)\", not Bluetooth)")
+                continue
+            }
+            guard !serialNumber.isEmpty else {
+                log("  → skipped (no SerialNumber)")
+                continue
+            }
+
+            if percent <= kThreshold {
+                if let lastSent = timestamps[serialNumber] {
+                    let hours = Date().timeIntervalSince(lastSent) / 3600
+                    log("  → below threshold (\(kThreshold)%), but notification suppressed (last sent \(String(format: "%.1f", hours))h ago, suppression window \(kSuppressionHours)h)")
+                } else {
+                    log("  → below threshold (\(kThreshold)%), sending notification")
+                    sendNotification(title: "\(product) battery low",
+                                     body:  "Battery status: \(percent)%")
+                    timestamps[serialNumber] = Date()
+                }
+            } else {
+                log("  → OK (above threshold \(kThreshold)%)")
             }
         }
     }
 
+    log("=== Check complete ===")
     saveTimestamps(timestamps)
 }
 
 // MARK: - Timestamp Persistence
 
 func loadTimestamps() -> [String: Date] {
-    guard FileManager.default.fileExists(atPath: prefsURL.path),
-          let data = try? Data(contentsOf: prefsURL),
+    log("Loading timestamps from: \(prefsURL.path)")
+    guard FileManager.default.fileExists(atPath: prefsURL.path) else {
+        log("  Prefs file not found — no suppression records")
+        return [:]
+    }
+    guard let data = try? Data(contentsOf: prefsURL),
           let obj  = try? PropertyListSerialization.propertyList(from: data, options: [], format: nil),
           let dict = obj as? [String: Date]
-    else { return [:] }
+    else {
+        log("  WARNING: failed to read/parse prefs file")
+        return [:]
+    }
 
     // Drop entries that are older than the suppression window.
     let cutoff = Date().addingTimeInterval(-kSuppressionHours * 3600)
-    return dict.filter { $0.value > cutoff }
+    let filtered = dict.filter { $0.value > cutoff }
+    for (serial, date) in filtered {
+        let hours = Date().timeIntervalSince(date) / 3600
+        log("  Suppressed serial \(serial) (notified \(String(format: "%.1f", hours))h ago)")
+    }
+    return filtered
 }
 
 func saveTimestamps(_ timestamps: [String: Date]) {
@@ -121,12 +172,14 @@ func saveTimestamps(_ timestamps: [String: Date]) {
 // MARK: - Notifications
 
 func sendNotification(title: String, body: String) {
+    log("  Sending notification: \"\(title)\" — \"\(body)\"")
     // UNUserNotificationCenter attributes the notification to the app bundle,
     // so the app icon is shown instead of the Script Editor icon.
     let center  = UNUserNotificationCenter.current()
     let sema    = DispatchSemaphore(value: 0)
 
     center.requestAuthorization(options: [.alert, .sound]) { granted, _ in
+        if !granted { log("  WARNING: notification permission not granted") }
         guard granted else { sema.signal(); return }
         let content   = UNMutableNotificationContent()
         content.title = title
