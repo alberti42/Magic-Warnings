@@ -40,6 +40,49 @@ After uninstalling the launcher you can move `Magic Warnings.app` to the Trash a
 
 ---
 
+## Troubleshooting
+
+If notifications are not appearing, run the app from Terminal with `--silent --log` to print a diagnostic trace to stdout:
+
+```bash
+"/Applications/Magic Warnings.app/Contents/MacOS/applet" --silent --log
+```
+
+The output shows every device found by `ioreg`, its transport type, battery level, and the reason a notification was or was not sent. A typical session looks like this:
+
+```
+=== Magic Warnings battery check started ===
+Loading timestamps from: ~/Library/Preferences/io.alberti42.magic-warnings.plist
+Running: /usr/sbin/ioreg -c AppleDeviceManagementHIDEventService -r -l
+Device #3: Product = "Magic Keyboard with Numeric Keypad"
+Device #3: SerialNumber = "F0T75030029HVQWA8"
+Device #3: Transport = "USB"
+Device #3: BatteryPercent = 100%
+  → skipped (Transport = "USB", not Bluetooth)
+Device #4: Product = "Magic Mouse"
+Device #4: SerialNumber = "20:91:DF:4F:C2:3A"
+Device #4: Transport = "Bluetooth"
+Device #4: BatteryPercent = 18%
+  → below threshold (20%), sending notification
+Device #5: Product = "Magic Trackpad"
+Device #5: SerialNumber = "8C:85:90:F3:68:BA"
+Device #5: Transport = "Bluetooth"
+Device #5: BatteryPercent = 38%
+  → OK (above threshold 20%)
+=== Check complete ===
+```
+
+**Common causes of missing notifications:**
+
+| Symptom in log | Fix |
+|---|---|
+| `WARNING: notification permission not granted` | Open System Settings → Notifications → Magic Warnings and enable notifications |
+| Device shows `Transport = "USB"` | Device is plugged in and charging — normal, no warning needed |
+| Device missing entirely from output | Device is off or not paired |
+| `notification suppressed (last sent Xh ago …)` | A notification was already sent within the 6-hour suppression window — working as intended |
+
+---
+
 ## Donations
 
 If you find **Magic Warnings** useful, consider buying me a coffee!
