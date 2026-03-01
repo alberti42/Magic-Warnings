@@ -71,7 +71,7 @@ uninstall-agent:
 release:
 	@TAG=$$(git describe --tags --abbrev=0 2>/dev/null); \
 	[ -n "$$TAG" ] || { echo "Error: no git tags found"; exit 1; }; \
-	printf "Promote pre-release $$TAG to full release? [y/N] "; \
+	printf "Publish draft $$TAG as latest release? [y/N] "; \
 	read CONFIRM; \
 	[ "$$CONFIRM" = "y" ] || { echo "Aborted."; exit 1; }; \
 	gh release edit "$$TAG" --prerelease=false --draft=false --latest; \
