@@ -48,6 +48,8 @@ If notifications are not appearing, run the app from Terminal with `--silent --l
 "/Applications/Magic Warnings.app/Contents/MacOS/applet" --silent --log
 ```
 
+> **Note:** `--silent` tells the app to skip the management dialog and run the battery check directly — this is the same mode used when the background agent calls the app every 10 minutes. Without it, launching the app opens the install/uninstall dialog instead of performing a check. `--log` then enables the diagnostic output.
+
 The output shows every device found by `ioreg`, its transport type, battery level, and the reason a notification was or was not sent. A typical session looks like this:
 
 ```
