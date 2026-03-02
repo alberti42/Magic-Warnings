@@ -26,7 +26,9 @@
 
    <img src="./Graphics/messages_authorization.jpg" alt="Notifications settings" style="width:400px;"/>
 
-4. *(Optional)* Allow notifications in Focus modes:
+4. *(Optional)* Set the notification style to **Persistent** in System Settings → Notifications → **Magic Warnings**. Since the app already suppresses repeated warnings for 6 hours per device, each notification that does appear is genuinely important — a Persistent alert stays on screen until you dismiss it, whereas a Temporary banner disappears after a few seconds and is easy to miss. Left unattended, your Magic device will simply run out of battery.
+
+5. *(Optional)* Allow notifications in Focus modes:
 
    <img src="./Graphics/focus_configuration.jpg" width=512 alt="Focus mode configuration"/>
 
